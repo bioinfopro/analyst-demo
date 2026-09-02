@@ -52,12 +52,6 @@
         <tr><td>All other libraries</td><td>WGS / RNA-seq</td><td class="pass">0.8-4.2%</td><td class="pass">9.6-24.1%</td><td class="pass">PASS</td></tr>
       </tbody>
     </table>
-    <h2>Recommended analyst action</h2>
-    <ol>
-      <li>Review <code>ctrl_03_rnaseq_rep2</code> after adapter trimming and confirm usable read retention.</li>
-      <li>Review <code>mut_02_wgs_rep1</code> against its paired replicate and check coverage uniformity before calling the engineered locus.</li>
-      <li>Do not discard either library silently; document the decision and rerun MultiQC after remediation.</li>
-    </ol>
     <footer>Report scope: FastQC and fastp summary for the 24-library demo design. Downstream WGS variant calls and RNA-seq feature counts require external FASTQ, reference, and annotation files.</footer>
   </main>
 </body>
