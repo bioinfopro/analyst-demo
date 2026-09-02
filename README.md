@@ -84,7 +84,14 @@ The recorded QC review identified two libraries requiring follow-up:
 | `ctrl_03_rnaseq_rep2` | 15% adapter contamination | Trim, confirm read retention and insert-size distribution, then reassess before interpreting expression results |
 | `mut_02_wgs_rep1` | Unusually low library complexity with 68.7% duplication | Compare with the paired replicate, inspect coverage uniformity, and treat allele-frequency estimates cautiously |
 
-The report is available at [reports/multiqc_report.html](reports/multiqc_report.html). It is a static analysis record for this repository and is explicitly labeled as synthetic presentation output because the underlying sequencing files are not stored here. A data-backed run should regenerate the report from the QC outputs:
+The report is available at [reports/multiqc_report.html](reports/multiqc_report.html). It is a static analysis record for this repository and is explicitly labeled as synthetic presentation output because the underlying sequencing files are not stored here.
+
+GitHub does not render HTML from the repository tree (the file view shows source and the raw endpoint serves `text/plain`). To view the report as a rendered page:
+
+- **GitHub Pages:** the [`Publish report to GitHub Pages`](.github/workflows/pages.yml) workflow deploys the repository on every push to `main`. Enable it once under **Settings → Pages → Build and deployment → Source: GitHub Actions**. The report is then served with the correct `text/html` type at `https://bioinfopro.github.io/analyst-demo/reports/multiqc_report.html`.
+- **No setup:** open [htmlpreview.github.io/?https://github.com/bioinfopro/analyst-demo/blob/main/reports/multiqc_report.html](https://htmlpreview.github.io/?https://github.com/bioinfopro/analyst-demo/blob/main/reports/multiqc_report.html), or clone the repo and open the file locally.
+
+A data-backed run should regenerate the report from the QC outputs:
 
 ```bash
 multiqc results/qc -o results/multiqc
