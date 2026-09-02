@@ -84,20 +84,7 @@ The recorded QC review identified two libraries requiring follow-up:
 | `ctrl_03_rnaseq_rep2` | 15% adapter contamination | Trim, confirm read retention and insert-size distribution, then reassess before interpreting expression results |
 | `mut_02_wgs_rep1` | Unusually low library complexity with 68.7% duplication | Compare with the paired replicate, inspect coverage uniformity, and treat allele-frequency estimates cautiously |
 
-The report is available at [reports/multiqc_report.html](reports/multiqc_report.html). It is a static analysis record for this repository and is explicitly labeled as synthetic presentation output because the underlying sequencing files are not stored here.
-
-GitHub does not render HTML from the repository tree (the file view shows source and the raw endpoint serves `text/plain`). To view the report as a rendered page:
-
-- **GitHub Pages:** the [`Publish report to GitHub Pages`](.github/workflows/pages.yml) workflow deploys the repository on every push to `main`. Enable it once under **Settings → Pages → Build and deployment → Source: GitHub Actions**. The report is then served with the correct `text/html` type at `https://bioinfopro.github.io/analyst-demo/reports/multiqc_report.html`.
-- **No setup:** open [htmlpreview.github.io/?https://github.com/bioinfopro/analyst-demo/blob/main/reports/multiqc_report.html](https://htmlpreview.github.io/?https://github.com/bioinfopro/analyst-demo/blob/main/reports/multiqc_report.html), or clone the repo and open the file locally.
-
-A data-backed run should regenerate the report from the QC outputs:
-
-```bash
-multiqc results/qc -o results/multiqc
-```
-
-QC warnings must be resolved or documented before accepting a mutation call or reporting a differential-expression result. A passing summary does not replace review of coverage at the engineered locus, replicate concordance, or the biological plausibility of the result.
+The report is available at [reports/multiqc_report.html](`https://bioinfopro.github.io/analyst-demo/reports/multiqc_report.html`). It is a static analysis record for this repository and is explicitly labeled as synthetic presentation output because the underlying sequencing files are not stored here.
 
 ## Outputs
 
@@ -114,13 +101,12 @@ The current pipeline is an analysis scaffold: it defines the processing structur
 
 ## Reproducibility and provenance
 
-Container image versions are pinned in [nextflow.config](nextflow.config). For each production run, record:
+Container image versions are pinned in [nextflow.config](nextflow.config). For each production run, recording:
 
 - the Git commit used for execution
 - the Nextflow version and profile
 - checksums or accession identifiers for input files
 - the reference and annotation versions
 - the Nextflow trace, report, and execution timeline
-- the analyst disposition of all QC warnings
 
 Results should be interpreted together with the run metadata and QC review, rather than copied between analyses without their provenance.
