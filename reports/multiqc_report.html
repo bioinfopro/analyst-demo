@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MultiQC report - microbial genomics analyst demo</title>
+  <style>
+    :root { --ink:#0b1f35; --blue:#25aec6; --orchid:#9525aa; --pale:#ecf1f6; --line:#d9e2ec; --white:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--white); font:15px/1.55 Inter,"Helvetica Neue",Arial,sans-serif; }
+    header { padding:48px max(24px,calc((100% - 1152px) / 2)); background:var(--ink); color:var(--white); }
+    main { max-width:1152px; margin:0 auto; padding:40px 24px 64px; }
+    h1,h2 { font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif; line-height:1.15; }
+    h1 { margin:8px 0 12px; font-size:clamp(2rem,4vw,3.25rem); }
+    h2 { margin:40px 0 16px; font-size:1.75rem; }
+    .eyebrow { color:var(--blue); font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .notice { border:1px solid var(--orchid); border-left:8px solid var(--orchid); padding:16px 20px; background:#f4e4f7; }
+    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px; }
+    .metric { border:1px solid var(--line); padding:20px; background:var(--pale); }
+    .metric strong { display:block; font:600 2rem/1.1 "Space Grotesk","Helvetica Neue",Arial,sans-serif; }
+    .metric span { color:#3b4c5d; }
+    table { width:100%; border-collapse:collapse; }
+    th,td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:var(--ink); color:var(--white); font-weight:600; }
+    .warn { color:var(--orchid); font-weight:700; }
+    .pass { color:#1b8b9e; font-weight:700; }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em; }
+    footer { border-top:1px solid var(--line); padding-top:24px; color:#3b4c5d; }
+    @media (max-width:720px) { .summary { grid-template-columns:repeat(2,1fr); } main { padding-top:24px; } table { font-size:13px; } th,td { padding:9px 8px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">MultiQC-style demo report</div>
+    <h1>Microbial genomics assay QC</h1>
+    <div>WGS edit confirmation and RNA-seq expression follow-up</div>
+  </header>
+  <main>
+    <div class="notice"><strong>Synthetic presentation report.</strong> This report is generated for the certification mock-up and does not represent committed sequencing data. The real workflow should regenerate MultiQC output from <code>results/qc</code>.</div>
+    <section class="summary" aria-label="QC summary">
+      <div class="metric"><strong>24</strong><span>libraries assessed</span></div>
+      <div class="metric"><strong>23</strong><span>libraries passing</span></div>
+      <div class="metric"><strong>1</strong><span>adapter warning</span></div>
+      <div class="metric"><strong>1</strong><span>complexity warning</span></div>
+    </section>
+    <h2>Run-level findings</h2>
+    <table>
+      <thead><tr><th>Library</th><th>Assay</th><th>Adapter content</th><th>Duplication</th><th>Status</th><th>Analyst interpretation</th></tr></thead>
+      <tbody>
+        <tr><td><code>ctrl_03_rnaseq_rep2</code></td><td>RNA-seq</td><td class="warn">15.0%</td><td>18.4%</td><td class="warn">WARN</td><td>Adapter contamination exceeds the 10% review threshold. Trim and inspect insert-size distribution before expression interpretation.</td></tr>
+        <tr><td><code>mut_02_wgs_rep1</code></td><td>WGS</td><td>2.1%</td><td class="warn">68.7%</td><td class="warn">WARN</td><td>Unusually low library complexity. Treat depth and allele-frequency estimates cautiously; investigate over-amplification or input quality.</td></tr>
+        <tr><td>All other libraries</td><td>WGS / RNA-seq</td><td class="pass">0.8-4.2%</td><td class="pass">9.6-24.1%</td><td class="pass">PASS</td><td>No immediate FastQC or fastp blocker identified.</td></tr>
+      </tbody>
+    </table>
+    <h2>Recommended analyst action</h2>
+    <ol>
+      <li>Review <code>ctrl_03_rnaseq_rep2</code> after adapter trimming and confirm usable read retention.</li>
+      <li>Review <code>mut_02_wgs_rep1</code> against its paired replicate and check coverage uniformity before calling the engineered locus.</li>
+      <li>Do not discard either library silently; document the decision and rerun MultiQC after remediation.</li>
+    </ol>
+    <footer>Report scope: FastQC and fastp summary for the 24-library demo design. Downstream WGS variant calls and RNA-seq feature counts require external FASTQ, reference, and annotation files.</footer>
+  </main>
+</body>
+</html>
